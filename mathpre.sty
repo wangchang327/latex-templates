@@ -1,0 +1,299 @@
+% Copyright 2020 王畅 (WANG Chang).
+% Permission is granted to copy, distribute and/or modify this
+% document under the terms of the Creative Commons
+% Attribution 4.0 International (CC BY 4.0)
+% http://creativecommons.org/licenses/by/4.0/
+
+\mode<presentation>
+
+% 选用灰色为主要色调
+\definecolor{mathpreblue}{HTML}{182936}
+\definecolor{mathpremarroon}{HTML}{704730}
+\setbeamercolor{structure}{fg=mathpreblue}
+\setbeamercolor{normal text}{fg=mathpreblue}
+\setbeamercolor{separator}{fg=mathpremarroon, bg=mathpremarroon}
+\setbeamercolor{footline}{bg=white}
+\setbeamercolor{block body}{bg=white}
+\setbeamercolor{block title}{bg=white, fg=mathpreblue}
+
+% 首页字体调整
+\setbeamerfont{title}{
+    size=\huge,
+    shape=\bfseries
+}
+
+\setbeamerfont{subtitle}{
+    size=\large,
+    shape=\normalfont
+}
+
+\setbeamerfont{author}{
+    size=\normalsize,
+    shape=\normalfont
+}
+
+\setbeamerfont{details}{
+    size=\footnotesize,
+    shape=\normalfont
+}
+
+% 各页字体调整
+\setbeamerfont{frametitle}{
+    size=\LARGE,
+    shape=\bfseries
+}
+\setbeamerfont{framesubtitle}{
+    size=\normalsize,
+    shape=\normalfont
+}
+
+% block字体调整
+\setbeamerfont{block title}{
+    size=\normalfont,
+    shape=\strut
+}
+
+\setbeamerfont{blockdef}{
+    size=\large,
+    shape=\bfseries
+}
+
+% list环境改换标识
+\setbeamerfont{description item}{shape=\bfseries}
+\setbeamertemplate{sections/subsections in toc}[square]
+\setbeamertemplate{itemize item}[square]
+\setbeamertemplate{itemize subitem}[circle]
+
+% 允许投影片跨页
+\setbeamertemplate{frametitle continuation}{}
+
+\setbeamertemplate{separator}{%
+    \usebeamercolor{separator}%
+    \textcolor{fg}{\rule{.7\textwidth}{.5pt}}%
+}
+
+% 作者之间换行
+\renewcommand{\beamer@andtitle}{\\}
+
+% 首页图片
+\RequirePackage{tikz}
+\usetikzlibrary{fadings}
+\newcommand{\background}[1]%
+    {\newcommand{\mathpre@background}{#1}}
+
+\tikzfading[
+    name=title page picture fading,
+    left color=transparent!0,
+    right color=transparent!100,
+]
+
+\setbeamertemplate{title page}{%
+    \begin{minipage}{.7\textwidth}
+        \raggedright
+        \usebeamerfont{title}
+        \inserttitle
+
+        \usebeamertemplate{separator}
+
+        \usebeamerfont{author}
+        \vspace{2em}
+        \insertauthor
+
+        \vspace{2em}
+        \usebeamerfont{details}
+        \insertinstitute
+
+        \insertdate
+    \end{minipage}
+
+    \ifdefined\mathpre@background
+    \begin{tikzpicture}[remember picture, overlay]
+        % 剪裁图片
+        \clip (current page.south east)
+           -- (current page.north east)
+           -- ++(-10, 0)
+           -- ++(-3, -\paperheight)
+           -- cycle;
+
+        % 设置图片
+        \node[
+            anchor=east,
+            inner sep=0,
+            outer sep=0
+        ] at (current page.east) {
+            \includegraphics[height=0.8\paperheight]
+                {\mathpre@background}
+        };
+    \end{tikzpicture}
+    \fi
+}
+
+% 投影片标题
+\setbeamertemplate{frametitle}{
+    \vskip1em\par
+    {\usebeamerfont{frametitle}\insertframetitle}\par
+    \usebeamerfont{framesubtitle}\insertframesubtitle\par
+}
+
+% 删掉导航条
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{headline}{}
+
+% 页底部标题, 作者与页数
+\setbeamertemplate{footline}{%
+    \leavevmode%
+    \hbox{%
+        \usebeamerfont{footline}%
+        \begin{beamercolorbox}[
+            wd=\textwidth,
+            ht=3ex,
+            dp=1.25ex
+        ]{footline}%
+            \hspace{1cm}%
+            \insertshorttitle%
+            \hfill%
+            \insertshortauthor%
+            \hspace{2em}%
+            \insertframenumber{} / \inserttotalframenumber%
+            \hspace{1cm}
+        \end{beamercolorbox}%
+    }
+    \vskip0pt%
+}
+
+% 美化定理环境
+\RequirePackage{pifont,manfnt,bbding}
+\RequirePackage[many]{tcolorbox}
+\RequirePackage{xeCJK}
+\setCJKfamilyfont{kaiti}{FandolKai}
+\newcommand{\kaishu}{\CJKfamily{kaiti}}
+
+\tcbset{
+    common/.style={
+        fontupper=\upshape\kaishu,
+        lower separated=false,
+        coltitle=white,
+        colback=gray!5,
+        boxrule=0.5pt,
+        fonttitle=\bfseries,
+        enhanced,
+        breakable,
+		top=8pt,
+		before skip=8pt,
+        attach boxed title to top left={yshift=-0.11in,xshift=0.15in},
+        boxed title style={boxrule=0pt,colframe=white,arc=0pt,outer arc=0pt},
+        separator sign={.},
+    },
+    defstyle/.style={
+        common,
+        colframe=black,  
+        colback=black!5,
+        colbacktitle=black, 
+        overlay unbroken and last={\node[anchor=south east, outer sep=0pt] at (\linewidth-width,0) {\textcolor{black}{$\clubsuit$}}; }
+    },
+    thmstyle/.style={
+        common,
+        colframe=black,  
+        colback=black!5,
+        colbacktitle=black, 
+        overlay unbroken and last={\node[anchor=south east, outer sep=0pt] at (\linewidth-width,0) {\textcolor{black}{$\heartsuit$}}; }
+    },
+    propstyle/.style={
+        common,
+        colframe=black,  
+        colback=black!5,
+        colbacktitle=black, 
+        overlay unbroken and last={\node[anchor=south east, outer sep=0pt] at (\linewidth-width,0) {\textcolor{black}{$\spadesuit$}}; }
+    },
+}
+
+% 定理之定义
+\newtcbtheorem[no counter]{definition}{定义}{defstyle}{def}
+\newtcbtheorem[no counter]{theorem}{定理}{thmstyle}{thm}
+\newtcbtheorem[no counter]{corollary}{推论}{thmstyle}{thm}
+\newtcbtheorem[no counter]{lemma}{引理}{thmstyle}{thm}
+\newtcbtheorem[no counter]{proposition}{命题}{thmstyle}{thm}
+\newtcbtheorem[no counter]{conjecture}{猜想}{thmstyle}{thm}
+
+\newenvironment{exercise}[1][]{
+ 	\par\noindent\textbf{\color{black}{思考题}#1\,}\sffamily
+}{\par\medskip\ignorespacesafterend}
+
+\newenvironment{example}[1][]{
+ 	\par\noindent\textbf{\color{black}{例}#1\,}\sffamily
+}{\par\medskip\ignorespacesafterend}
+
+\newenvironment{problem}[1][]{
+ 	\par\noindent\textbf{\color{black}{习题}#1\,}\sffamily
+}{\par\medskip\ignorespacesafterend}
+
+% 重新定义证明和解答环境
+\let\proof\relax
+\let\endproof\relax
+\let\note\relax
+\let\endnote\relax
+
+\newenvironment{proof}{\par\noindent\textbf{\color{black}证\;}\color{black!90}{\small}}{\par}
+\newenvironment{note}{\par\noindent{\makebox[0pt][r]{
+    \scriptsize\color{black!90}\textdbend\quad}\textbf{\color{black}{注意}\,}}\kaishu}{\par}
+\newenvironment{solution}{\par\noindent\textbf{\color{black}解\;}\kaishu}{\vskip2ex\par}
+
+\AtEndEnvironment{solution}{\hfill\color{black}\ensuremath{\blacktriangleleft}}
+\AtEndEnvironment{proof}{\hfill\color{black}\ensuremath{\blacktriangleleft}}
+\AtEndEnvironment{example}{\hfill\color{black}\ensuremath{\blacktriangleleft}}
+
+% 导入需要的包
+\RequirePackage{anyfontsize}
+\RequirePackage{ulem}
+\RequirePackage{siunitx} % SI单位制
+\RequirePackage{graphicx}
+\RequirePackage{subfigure}
+\RequirePackage{multirow}
+\RequirePackage[export]{adjustbox}
+\RequirePackage[version=4]{mhchem} % 化学式
+\RequirePackage{booktabs} % fancy表格
+\RequirePackage{esint}
+\RequirePackage{enumerate}
+\RequirePackage{braket} % 集合和狄拉克符号
+\RequirePackage{mathrsfs} % 花体字
+\RequirePackage{mathtools} % 一些额外符号
+\PassOptionsToPackage{pdfa}{hyperref}
+
+% 主字体设置
+\usefonttheme[only math]{serif}
+\mhchemoptions{textfontcommand=\sffamily}
+\mhchemoptions{mathfontcommand=\textsf}
+
+\setCJKmainfont[
+    BoldFont={* Bold},
+]{Noto Sans CJK SC}
+\setCJKsansfont[
+    BoldFont={* Bold},
+]{Noto Sans CJK SC}
+
+% 罗马数字
+\makeatletter
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
+% 简单的致谢页
+\newcommand{\fin}[1]{%
+    \begin{frame}
+        \begin{center}
+            \Huge{#1}
+        \end{center}
+    \end{frame}
+}
+
+% 占满页面的图片
+\newcommand<>{\fullgraphicsframe}[1]{%
+    {
+        \usebackgroundtemplate{%
+            \vbox to \paperheight{\vfil\hbox to \paperwidth{\hfil\includegraphics{#1}\hfil}\vfil}
+        }
+        \begin{frame}[plain]
+        \end{frame}
+    }
+}
+
+\mode<all>

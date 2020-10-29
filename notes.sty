@@ -1,0 +1,149 @@
+% Copyright 2019 王畅 (WANG Chang).
+% Permission is granted to copy, distribute and/or modify this
+% document under the terms of the Creative Commons
+% Attribution 4.0 International (CC BY 4.0)
+% http://creativecommons.org/licenses/by/4.0/
+
+\ProvidesPackage{notes}
+
+% 导入必要的包
+\usepackage{ctex}
+\setCJKsansfont[
+    BoldFont={* Bold},
+]{Noto Sans CJK SC}
+\usepackage{answers}
+\usepackage{ntheorem}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{siunitx}
+\usepackage{booktabs}
+\PassOptionsToPackage{usenames, svgnames, dvipsnames,table}{xcolor}
+\usepackage{xcolor}
+\usepackage[version=4]{mhchem}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{fontspec}
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+\usepackage{esint}
+\usepackage{indentfirst}
+\hypersetup{urlcolor=RubineRed, linkcolor=RoyalBlue, citecolor=ForestGreen}
+\usepackage{fullpage}
+\usepackage{booktabs}
+\usepackage{paralist}
+\usepackage{braket}
+
+% CChO用
+\newfontfamily\code{Arial}
+\def\cf#1{\textbf{\code{#1}}}
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+
+% 替换部分符号
+\DeclareSymbolFont{CMlargesymbols}{OMX}{cmex}{m}{n}
+\let\sumop\relax\let\prodop\relax
+\DeclareMathSymbol{\sumop}{\mathop}{CMlargesymbols}{"50}
+\DeclareMathSymbol{\prodop}{\mathop}{CMlargesymbols}{"51}
+
+% 定理定义
+\theorembodyfont{\fangsong}
+\theoremheaderfont{\sffamily\bfseries}
+\theoremseparator{\ }
+\setlength{\theorempreskipamount}{2mm}
+\setlength{\theorempostskipamount}{2mm}
+	
+\newtheorem{theorem}{定理}[section]
+\newtheorem{corollary}[theorem]{推论}
+\newtheorem{lemma}[theorem]{引理}
+\newtheorem{proposition}[theorem]{命题}
+\newtheorem{definition}[theorem]{定义}
+\newtheorem{definition-theorem}[theorem]{定义--定理}
+\newtheorem{definition-lemma}[theorem]{定义--引理}
+\newtheorem{definition-proposition}[theorem]{定义--命题}
+\newtheorem{definition-corollary}[theorem]{定义--推论}
+\newtheorem{hypothesis}[theorem]{假设}
+\newtheorem{conjecture}[theorem]{猜想}
+\newtheorem{axiom}[theorem]{公理}
+
+\theorembodyfont{\songti}
+\newtheorem{example}[theorem]{例}
+\newtheorem{remark}[theorem]{注记}
+\newtheorem{convention}[theorem]{约定}
+\newtheorem{exercise}[theorem]{练习}
+
+\theorembodyfont{}
+\theoremstyle{nonumberplain}
+\theoremheaderfont{\sffamily\bfseries}
+\theoremseparator{\enspace}
+\theoremsymbol{\ensuremath{\blacktriangleleft}}
+\newtheorem{proof}{证明}
+\newtheorem{sketch}{证明梗概}
+
+% 节标题定义
+\renewcommand*{\sectionformat}%
+    {\color{blue}\S\sffamily\thesection\enskip}
+\renewcommand*{\subsectionformat}%
+    {\color{blue}\S\sffamily\thesubsection\enskip}
+\renewcommand*{\subsubsectionformat}%
+    {\color{blue}\S\sffamily\thesubsubsection\enskip}
+
+% 一些有用的替代标志
+\newcommand{\cbrt}[1]{\sqrt[3]{#1}}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceiling}[1]{\left\lceil #1 \right\rceil}
+\newcommand{\mailto}[1]{\href{mailto:#1}{\texttt{#1}}}
+\newcommand{\eps}{\epsilon}
+\newcommand{\dg}{^\circ}
+\newcommand{\diff}{\mathrm d}
+
+% 两种封面
+\newcommand{\meta}[2]{\title{\textbf{\textsf{#1}}}
+    \author{\textbf{\textsf{#2}}} \\
+    \date{\vspace{-4ex}}
+    \maketitle
+}
+
+\newcommand{\fancycover}[4]{%
+    \begin{titlepage}
+        \vspace*{\stretch{1}}
+        \noindent\begin{center}\rule{\linewidth}{2pt}\end{center}
+        \begin{center}
+            \Huge \textbf{\textsf{#1}} \\ \vspace{1em}
+            \huge \textbf{\textsf{#2}}
+        \end{center}
+        \noindent\begin{center}\rule{\linewidth}{2pt}\end{center}
+        \vspace{1em}
+        \begin{center}
+            {\Large\textbf{\textsf{#3}}} \\ \vspace{1em}
+            {\Large \href{mailto: #4}{\texttt{#4}}} \\ \vspace{1.5em}
+        \end{center}
+        \vfill
+    \end{titlepage}
+    \newpage
+    \thispagestyle{empty}
+    \begin{center}
+        \Large Version: \today
+    \end{center}
+    \vfill
+    \begin{tabular}{p{.9\textwidth}}
+        This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.
+        To view a copy of this license, visit \url{http://creativecommons.org/licenses/by-nc/4.0/}. \\
+        \vspace{\baselineskip}
+        \begin{center}
+            \includegraphics[scale=1]{by-nc.eps}
+        \end{center} \\
+    \end{tabular}
+    \newpage
+    \tableofcontents
+    \newpage
+}
+
+% 答案与提示
+\Newassociation{hint}{hintitem}{hints}
+\renewcommand{\solutionextension}{out}
+\Opensolutionfile{hints}
+\newcommand{\makehints}{\Closesolutionfile{hints}\input{hints.out}}
+
+\renewcommand{\sfdefault}{cmss}

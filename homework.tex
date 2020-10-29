@@ -1,0 +1,89 @@
+% Copyright 2020 王畅 (WANG Chang).
+% Permission is granted to copy, distribute and/or modify this
+% document under the terms of the Creative Commons
+% Attribution 4.0 International (CC BY 4.0)
+% http://creativecommons.org/licenses/by/4.0/
+
+\documentclass{exam}
+\usepackage{ctex}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs} % 花写字母
+\usepackage{xcolor}
+\usepackage{paralist} % 扩展列表, 如紧凑列表
+\usepackage{mathtools} % 一些额外符号
+\usepackage{booktabs} % fancy表格
+\usepackage{graphicx} % 图片和浮动
+\usepackage{float}
+\pointname{分}
+
+% 页眉页脚
+\pagestyle{headandfoot}
+\firstpageheadrule
+\firstpageheader{00000000: 肥宅导论}{作业 \#1}{2333/02/33} % 修改为作业布置的日期
+\firstpagefooter{}{第 \thepage 页,共 \numpages 页}{}
+\runningfooter{}{第 \thepage 页,共 \numpages 页}{}
+
+\renewcommand{\solutiontitle}{\noindent{\heiti 解答:}\enspace} % 答案前面的提示词
+\theoremstyle{remark}
+\newtheorem*{remark}{评论}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.symbols}
+\newenvironment{hint}{% 提示词绘制
+	\ifvmode
+		\ignorespaces
+	\else
+		\quad
+	\fi
+	\begin{tikzpicture}[baseline=(H.base), every node/.style={signal, draw, very thin, signal to=east, signal from=nowhere, signal pointer angle=120, inner sep=2pt}]
+		\node[anchor=mid west] (H) at (0,0) {\heiti\footnotesize 提示};
+	\end{tikzpicture}
+}{}
+
+% 字体更换
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+\DeclareSymbolFont{CMlargesymbols}{OMX}{cmex}{m}{n}
+\let\sumop\relax\let\prodop\relax
+\DeclareMathSymbol{\sumop}{\mathop}{CMlargesymbols}{"50}
+\DeclareMathSymbol{\prodop}{\mathop}{CMlargesymbols}{"51}
+
+\begin{document}
+    \vspace*{0in}
+    \begin{center}
+        \Huge\bf 作业 \#1 % 修改为作业编号
+    \end{center}
+	
+	\unframedsolutions % 取消答案的框
+	\SolutionEmphasis{\fangsong} % 答案字体设置
+    \printanswers % 打印答案, 布置作业时请注释掉
+    
+    {\small\kaishu 说明: 本作业不用交, 交了记0分.}
+
+    % \question表示一个题
+    % part和subpart用来分小问
+    % solution用来写答案
+    \begin{questions}
+        \question[5] 解释你一天是如何达成肥宅目标的.
+        \begin{solution}
+            (留白)
+        \end{solution}
+        \begin{remark}
+            留白, 充分显示了肥宅的本性.
+        \end{remark}
+
+        \question[5] 考虑算式 $1 + 2$.
+        \begin{parts}
+            \part[2] 请问它等于什么? \begin{hint} 答案不是3. \end{hint}
+            \part[3] 解释你的答案.
+        \end{parts}
+        \begin{solution}
+            \begin{parts}
+                \part 答案为 $2 + 1$.
+                \part 因为自然数的加法做成一个 Abel 群.
+            \end{parts}
+        \end{solution}
+    \end{questions}
+\end{document}
