@@ -1,15 +1,15 @@
-# LaTeX Templates - 日常事务LaTeX懒人包
+# LaTeX Templates - 日常事务 LaTeX 懒人包
 
 [![made-with-latex](https://img.shields.io/badge/Made%20with-LaTeX-1f425f.svg)](https://www.latex-project.org/) [![GitHub stars](https://img.shields.io/github/stars/wangchang327/latex-templates.svg?style=social&label=Star&maxAge=2592000)](https://GitHub.com/wangchang327/latex-templates/stargazers/)
 
-整理了一些常用的TeX模板，欢迎切磋取用。因内容是逐渐积累而得，故代码风格和格式有所不同，敬请谅解。制作之基本标准是：简洁美观、功能齐全。其中，较为正式的pre和课程笔记均单独分离```sty```文件，而追求短平快的作业和报告则直接以```tex```形式提供。
+整理了一些常用的 TeX 模板，欢迎切磋取用。因内容是逐渐积累而得，故代码风格和格式有所不同，敬请谅解。制作之基本标准是：简洁美观、功能齐全。其中，较为正式的 pre 和课程笔记均单独分离 ```sty``` 文件，而追求短平快的作业和报告则直接以 ```tex``` 形式提供。
 
-* mathpre.sty：用于presentation。
-* notes.sty：用于scribe notes和汇编整理notes。
+* mathpre.sty：用于 presentation。
+* notes.sty：用于 scribe notes 和汇编整理 notes。
 * homework.tex：用于写作业。
 * report.tex：用于写课程报告。
 
-* pku-cover.tex：一个snippet，生成PKU论文封面。
+* pku-cover.tex：一个 snippet，生成 PKU 论文封面。
 
 下面首先给出效果图，再给出用例及注意事项。
 
@@ -41,8 +41,8 @@
 
 ### ```mathpre.sty```
 
-* 需要安装Noto系列中文字体，按[这里](https://github.com/googlefonts/noto-cjk)下载，也可以删掉文件中相应的设置。
-* 定理环境须跟```{}{}```，与一般```amsmath/thm```的用法不同。引入这两个包会导致编译错误。
+* 需要安装 Noto 系列中文字体，按[这里](https://github.com/googlefonts/noto-cjk)下载，也可以删掉文件中相应的设置。
+* 定理环境须跟```{}{}```，与一般 ```amsmath/thm``` 的用法不同。引入这两个包会导致编译错误。
 * BUGS：如果想要使用编号的定理环境，则不能制作动画，否则编号不对。
 
 ```latex
@@ -196,8 +196,8 @@
 
 ### ```notes.sty```
 
-* 需要安装Noto系列中文字体，按[这里](https://github.com/googlefonts/noto-cjk)下载，也可以删掉文件中相应的设置。
-* 有两种封面设置：```\fancycover[4]```用于汇编整理notes，会自动生成单页封面及版权页；```\meta[2]```用于单次scribe notes，只会生成类似```article```的标题。
+* 需要安装 Noto 系列中文字体，按[这里](https://github.com/googlefonts/noto-cjk)下载，也可以删掉文件中相应的设置。
+* 有两种封面设置：```\fancycover[4]```用于汇编整理 notes，会自动生成单页封面及版权页；```\meta[2]``` 用于单次 scribe notes，只会生成类似 ```article``` 的标题。
 
 ```latex
 \documentclass{scrartcl}
