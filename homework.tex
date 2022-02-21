@@ -32,14 +32,14 @@
 \usepackage{tikz}
 \usetikzlibrary{shapes.symbols}
 \newenvironment{hint}{% 提示词绘制
-	\ifvmode
-		\ignorespaces
-	\else
-		\quad
-	\fi
-	\begin{tikzpicture}[baseline=(H.base), every node/.style={signal, draw, very thin, signal to=east, signal from=nowhere, signal pointer angle=120, inner sep=2pt}]
-		\node[anchor=mid west] (H) at (0,0) {\heiti\footnotesize 提示};
-	\end{tikzpicture}
+    \ifvmode
+        \ignorespaces
+    \else
+        \quad
+    \fi
+    \begin{tikzpicture}[baseline=(H.base), every node/.style={signal, draw, very thin, signal to=east, signal from=nowhere, signal pointer angle=120, inner sep=2pt}]
+        \node[anchor=mid west] (H) at (0,0) {\heiti\footnotesize 提示};
+    \end{tikzpicture}
 }{}
 
 % 字体更换
@@ -55,9 +55,9 @@
     \begin{center}
         \Huge\bf 作业 \#1 % 修改为作业编号
     \end{center}
-	
-	\unframedsolutions % 取消答案的框
-	\SolutionEmphasis{\fangsong} % 答案字体设置
+    
+    \unframedsolutions % 取消答案的框
+    \SolutionEmphasis{\fangsong} % 答案字体设置
     \printanswers % 打印答案, 布置作业时请注释掉
     
     {\small\kaishu 说明: 本作业不用交, 交了记0分.}

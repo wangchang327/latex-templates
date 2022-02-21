@@ -137,14 +137,14 @@
 \usepackage{tikz}
 \usetikzlibrary{shapes.symbols}
 \newenvironment{hint}{% 提示词绘制
-	\ifvmode
-		\ignorespaces
-	\else
-		\quad
-	\fi
-	\begin{tikzpicture}[baseline=(H.base), every node/.style={signal, draw, very thin, signal to=east, signal from=nowhere, signal pointer angle=120, inner sep=2pt}]
-		\node[anchor=mid west] (H) at (0,0) {\heiti\footnotesize 提示};
-	\end{tikzpicture}
+    \ifvmode
+        \ignorespaces
+    \else
+        \quad
+    \fi
+    \begin{tikzpicture}[baseline=(H.base), every node/.style={signal, draw, very thin, signal to=east, signal from=nowhere, signal pointer angle=120, inner sep=2pt}]
+        \node[anchor=mid west] (H) at (0,0) {\heiti\footnotesize 提示};
+    \end{tikzpicture}
 }{}
 
 % 字体更换
@@ -160,9 +160,9 @@
     \begin{center}
         \Huge\bf 作业 \#1 % 修改为作业编号
     \end{center}
-	
-	\unframedsolutions % 取消答案的框
-	\SolutionEmphasis{\fangsong} % 答案字体设置
+    
+    \unframedsolutions % 取消答案的框
+    \SolutionEmphasis{\fangsong} % 答案字体设置
     \printanswers % 打印答案, 布置作业时请注释掉
     
     {\small\kaishu 说明: 本作业不用交, 交了记0分.}
@@ -282,19 +282,19 @@
 \date{2333年冬}
 
 \fancypagestyle{plain}{
-	\lhead{睡觉实习}
-	\chead{}
-	\rhead{Lab报告 \#1}
-	\lfoot{张三: 2332332333}
-	\cfoot{}
-	\rfoot{第 \thepage 页,共 \pageref*{LastPage} 页}
+    \lhead{睡觉实习}
+    \chead{}
+    \rhead{Lab报告 \#1}
+    \lfoot{张三: 2332332333}
+    \cfoot{}
+    \rfoot{第 \thepage 页,共 \pageref*{LastPage} 页}
 }
 
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 
 \begin{document}
-	\maketitle
+    \maketitle
     \pagestyle{plain}
     \tableofcontents
 
@@ -338,40 +338,40 @@ while (1) sleep();
 \newcommand\dlmu[2][4cm]{\hskip 1pt \underline{\hb@xt@ #1{\hss #2 \hss}} \hskip 3pt}
 \makeatother
 \begin{document}
-	\thispagestyle{empty}
-	\vspace*{1.0cm}
-	\begin{figure}[ht]
-		\centering
-		\includegraphics[width=0.4\linewidth]{figures/pku.pdf}
-	\end{figure}
-	\begin{center}
-		\huge{\textbf{政治课论文}}
-	\end{center}
-	\vspace*{1.5cm}
-	\begin{center}
-		\LARGE{题目:} \fontsize{36}{36}{\underline{\textbf{\quad 一百 \quad}}\\}
-		\begin{spacing}{1.5}
-			\LARGE{\leftline{\hspace{180pt}\textbf{\underline{\qquad\quad --- 万岁!\hspace{7pt}}}}}
-		\end{spacing}
-	\end{center}
-	\vspace*{0.5cm}
-	\begin{center}
-		\begin{spacing}{2.0}
-			\LARGE{
-				\textbf{\heiti{姓\qquad 名: }}\fangsong{\dlmu[8cm]{青蛙}}\\
-				\textbf{\heiti{学\qquad 号: }}\fangsong{\dlmu[8cm]{19260817}}\\
-				\textbf{\heiti{院\qquad 系: }}\fangsong{\dlmu[8cm]{上海交通大学}}\\
-				\textbf{\heiti{专业方向: }}\fangsong{\dlmu[8cm]{电机系}}\\
-				\textbf{\heiti{授课教师: }}\fangsong{\dlmu[8cm]{不详}}\\
-			}
-		\end{spacing}
-	\end{center}
-	\vspace*{1.0cm}
-	\begin{center}
-		\Large{二〇二六年八月}
-	\end{center}
-	\newpage
-	\clearpage
+    \thispagestyle{empty}
+    \vspace*{1.0cm}
+    \begin{figure}[ht]
+        \centering
+        \includegraphics[width=0.4\linewidth]{figures/pku.pdf}
+    \end{figure}
+    \begin{center}
+        \huge{\textbf{政治课论文}}
+    \end{center}
+    \vspace*{1.5cm}
+    \begin{center}
+        \LARGE{题目:} \fontsize{36}{36}{\underline{\textbf{\quad 一百 \quad}}\\}
+        \begin{spacing}{1.5}
+            \LARGE{\leftline{\hspace{180pt}\textbf{\underline{\qquad\quad --- 万岁!\hspace{7pt}}}}}
+        \end{spacing}
+    \end{center}
+    \vspace*{0.5cm}
+    \begin{center}
+        \begin{spacing}{2.0}
+            \LARGE{
+                \textbf{\heiti{姓\qquad 名: }}\fangsong{\dlmu[8cm]{青蛙}}\\
+                \textbf{\heiti{学\qquad 号: }}\fangsong{\dlmu[8cm]{19260817}}\\
+                \textbf{\heiti{院\qquad 系: }}\fangsong{\dlmu[8cm]{上海交通大学}}\\
+                \textbf{\heiti{专业方向: }}\fangsong{\dlmu[8cm]{电机系}}\\
+                \textbf{\heiti{授课教师: }}\fangsong{\dlmu[8cm]{不详}}\\
+            }
+        \end{spacing}
+    \end{center}
+    \vspace*{1.0cm}
+    \begin{center}
+        \Large{二〇二六年八月}
+    \end{center}
+    \newpage
+    \clearpage
 \end{document}
 ```
 
