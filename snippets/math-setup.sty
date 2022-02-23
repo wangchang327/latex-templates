@@ -1,0 +1,114 @@
+\RequirePackage{amsmath} % 可引入选项 leqno 左置公式标号
+\RequirePackage{amssymb}
+\RequirePackage{mathrsfs} % 花体字母
+\RequirePackage[centercolon]{mathtools} % 扩展符号和箭头, centercolon 有助于硬编码的 := 正确显示
+\RequirePackage{esint} % 更加丰富和美观的积分符号
+
+% 以下自行取舍
+\RequirePackage{upgreek} % 正体希腊字母
+\RequirePackage{bm} % 粗体, 比 \boldsymbol 更推荐
+\RequirePackage{extarrows} % 额外的箭头, 例如在各种箭头上下书写
+
+% 以下自行取舍
+\numberwithin{equation}{section} % 公式编号按章节或者节
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+\allowdisplaybreaks % 允许 align 等环境断页
+
+% 定理环境设置, 中文字体均需配合 xeCJK 使用
+\AtEndPreamble{
+    \RequirePackage[thmmarks, amsmath, hyperref]{ntheorem} % 选项为兼容性设置
+    
+    % \theoremstyle{change} % 根据个人喜好选择: 若启用则定理形如 ``1.1.1. 定理''
+    \theorembodyfont{\fangsong} % 定理叙述的字体
+    \theoremheaderfont{\bfseries\thmheiti} % 定理名称的字体, 必要时可加 \sffamily
+    \theoremseparator{\ } % 名称和叙述的分隔符
+    \setlength{\theorempreskipamount}{2mm} % 前后间距
+    \setlength{\theorempostskipamount}{2mm}
+    
+    \newtheorem{theorem}{定理} %[section/chapter] 可根据需要确定按节或者按章标号
+    \newtheorem{corollary}[theorem]{推论}
+    \newtheorem{lemma}[theorem]{引理}
+    \newtheorem{proposition}[theorem]{命题}
+    \newtheorem{hypothesis}[theorem]{假设}
+    \newtheorem{conjecture}[theorem]{猜想}
+    \newtheorem{axiom}[theorem]{公理}
+    \newtheorem{definition}[theorem]{定义}
+
+    \theorembodyfont{\songti} % 一些其他环境的字体
+    \newtheorem{problem}[theorem]{例题}
+    \newtheorem{convention}[theorem]{约定}
+    \theoremsymbol{\ensuremath{\varspadesuit}} % 根据个人喜好选择: 证明结尾的提示符
+    \newtheorem{remark}[theorem]{注}
+    \theoremsymbol{\ensuremath{\diamondsuit}}
+    \newtheorem{example}[theorem]{例}
+
+    \theoremseparator{.\ }
+    \theoremsymbol{\ensuremath{\square}}
+    \newtheorem{hwsol}[theorem]{\quad}
+
+    % 以下为证明环境
+    \theorembodyfont{\songti}
+    \theoremstyle{nonumberplain}
+    \theoremheaderfont{\bfseries\CJKfamily{pffont}}
+    \theoremseparator{\enspace}
+    \theoremsymbol{\ensuremath{\square}} % 根据个人喜好选择: 证明结尾的提示符
+    \newtheorem{proof}{证明}
+    \newtheorem{solution}{解}
+    \newtheorem{sketch}{证明梗概}
+
+    % 环境结尾如果是图或者表, 经常缺少结尾符, 需手动添加
+    \newcommand{\qedhere}{\hfill\ensuremath{\square}}
+    \newcommand{\exahere}{\hfill\ensuremath{\diamondsuit}}
+
+    \RequirePackage{thm-restate} % 自行取舍, 可重述一个已经提到过的定理, 标号不变 (有 bug 风险)
+}
+
+% 以下为常用符号
+\renewcommand{\emptyset}{\ensuremath{\varnothing}} % 替换原版丑陋的空集
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+
+% 数集
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\CC}{\ensuremath{\mathbb{C}}}
+\newcommand{\F}{\ensuremath{\mathbb{F}}}
+
+\newcommand{\dd}{\,\mathrm{d}} % 微分符号, 需自行决定是否正体
+\DeclareMathOperator{\argmax}{argmax}
+\DeclareMathOperator{\argmin}{argmin}
+\newcommand{\e}{\mathrm e} % 自然对数的底数, 需自定决定是否正体
+\newcommand{\E}{\operatorname*{\mathbb E}}
+\newcommand{\var}{\operatorname*{Var}}
+\newcommand{\cov}{\operatorname*{cov}}
+\newcommand{\ceil}[1]{\ensuremath{\left\lceil #1 \right\rceil}}
+\newcommand{\floor}[1]{\ensuremath{\left\lfloor #1 \right\rfloor}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\spec}{\operatorname{Spec}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\rer}{\operatorname{ker}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\dom}{\operatorname{dom}}
+\newcommand{\ran}{\operatorname{ran}}
+\newcommand{\card}{\operatorname{card}}
+\newcommand{\lcm}{\operatorname{lcm}}
+\newcommand{\per}{\operatorname{per}}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\nmgp}{\vartriangleleft} % 正规子群
+\newcommand{\nmgpto}{\vartriangleright}
+\renewcommand{\mod}[1]{\left(\operatorname{mod} #1 \right)} % 重定义了 \mod, 也可以用 amsmath 提供的 \pmod 等
+
+% 两类 Stirling 数
+\DeclareRobustCommand{\stirlinga}{\genfrac[]{0pt}{}}
+\DeclareRobustCommand{\stirlingb}{\genfrac\{\}{0pt}{}}
+
+% 以下是一些风格的变化, 需要自行取舍
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\geq}{\geqslant}
+\renewcommand{\preceq}{\preccurlyeq}
+\renewcommand{\succeq}{\succcurlyeq}
+\renewcommand{\epsilon}{\varepsilon}

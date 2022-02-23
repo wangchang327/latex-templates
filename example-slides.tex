@@ -1,0 +1,43 @@
+\documentclass[notheorems, noamsthm, aspectratio=169, 12pt]{beamer}
+\usepackage{snippets/font-setup}
+\usepackage{snippets/beamer-setup}
+\usepackage{snippets/math-setup}
+\background{background.jpg}
+
+\title{西江月·证明}
+\author{无名氏}
+\institute{加里敦大学}
+\date{2333 年 2 月 33 日}
+
+\begin{document}
+    \maketitle
+    \begin{frame}
+        \frametitle{Cantor 集}
+        \begin{itemize}
+            \item Cantor 是集合论的创始人.
+            \[ \mathscr C \coloneqq \left\{\sum_{n=1}^\infty a_n3^{-n}:a_n=0, 2 \right\}. \]
+        \end{itemize}
+        \begin{theorem}[沃·兹基硕德, 2022]
+            即得易见平凡, 仿照上例显然.
+        \end{theorem}
+        \begin{proof}
+            留作习题答案略, 读者自证不难.
+        \end{proof}
+        \begin{example}
+            反之亦然同理, 推论自然成立, 略去过程 QED, 由上可知证毕.
+        \end{example}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Hall 定理}
+        \begin{block}{婚配}
+            我们希望每个人都拥护幸福的婚姻, 但众所周知这难以实现. 至少在中国, (拥有户口的)男性数量大于女性.
+        \end{block}
+        \begin{alertblock}{问题}
+            那么, 是否能够在每个男性最多结婚一次的情况下, 为每个女性找到一个与她互相喜欢的伴侣呢? 我们可将问题抽象为图论问题.
+        \end{alertblock}
+        \begin{exampleblock}{Hall}
+            二部图 $G(X, Y)$ 存在一个饱和 $X$ 的匹配当且仅当对任意的 $S \subseteq X$ 都有 $|\Gamma(S)| \geq |S|$. 其中 $\Gamma(S) = \bigcup_{x \in S} \mathcal N(x)$.
+        \end{exampleblock}
+    \end{frame}        
+\end{document}

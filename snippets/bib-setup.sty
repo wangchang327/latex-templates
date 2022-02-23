@@ -1,0 +1,32 @@
+\RequirePackage[backend=biber,
+    style=alphabetic, % 引用格式, 最常用的应为 numeric
+    defernumbers=true,
+    hyperref=auto,
+    backref=true, % 参考文献处显示引用位置, 便于交叉参照
+    % refsection=chapter, % 只对 report/book 有效, 每章附有单独的参考文献
+    giveninits=true % 自行取舍, 作者的 given name 均只显示缩写
+]{biblatex}
+
+% \renewcommand{\em}{\itshape} % 如果前面用粗体表示强调, 则在参考文献之前需要加入, 恢复风格
+% 汉化, 有一些文档类不存在相应 xxxname
+\makeatletter
+\@ifclassloaded{book}{\renewcommand{\bibname}{参考文献}}{\renewcommand{\refname}{参考文献}} % 需视文档类不同选择 refname/bibname
+\makeatother
+
+% 以下为实现 per chapter references 的参考代码, 可自行修改使用
+% \defbibheading{chapternotes}[\refname]{\section*{参考文献}}
+% \newcommand{\chapterbib}{%
+%     {\renewcommand{\em}{\itshape}
+%     \renewcommand*{\bibfont}{\footnotesize}
+%     \setlength\bibitemsep{0.1\baselineskip}
+%     \printbibliography[heading=chapternotes]}
+% }
+
+% 汉化 biblatex 生成的条目, 自行取舍
+\DefineBibliographyStrings{english}{%
+    in={刊于},
+    editor={主编},
+    byeditor={编者为},
+    backrefpage={引用于 p.\!},
+    backrefpages={引用于 pp.\!},
+}

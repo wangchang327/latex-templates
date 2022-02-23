@@ -1,0 +1,114 @@
+\documentclass[11pt]{article}
+\usepackage{snippets/font-setup}
+\usepackage{snippets/title-setup}
+\usepackage{snippets/math-setup}
+\usepackage{snippets/geometry-setup}
+\usepackage{snippets/list-setup}
+\usepackage{snippets/algo-setup}
+\usepackage{snippets/tbfig-setup}
+\usepackage{snippets/tikz-setup}
+\usepackage{snippets/bib-setup}
+
+\title{\huge \textbf{SysY 语言到 RISC-V 编译器的实现} \\[1.5mm] \Large 2021 年春编译原理课程实践报告}
+\author{张三 \\ 114514}
+\date{}
+
+\addbibresource{example-refs.bib}
+
+\begin{document}
+    \maketitle
+    \tableofcontents
+    
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[scale=0.9]
+            \small
+            \draw[fill=gray!10, draw=black!50] (0,0) rectangle ++(1.5,2.5);
+            \node at (0.75,1.25) {\shortstack{词法 \\ 分析 \\ (Flex)}};
+            \draw[-{Stealth[angle'=45]}] (1.5,1.25) -- node[above] {token} node[below] {流} ++(1.25,0);
+            \begin{scope}[shift={(2.75,0)}]
+                \draw[fill=gray!10, draw=black!50] (0,0) rectangle ++(1.5,2.5);
+                \node at (0.75,1.25) {\shortstack{语法 \\ 分析 \\ (Bison)}};
+                \draw[-{Stealth[angle'=45]}] (1.5,1.25) -- node[above] {SysY} node[below] {AST} ++(1.25,0);
+            \end{scope}
+            \begin{scope}[shift={(5.5,0)}]
+                \draw[fill=gray!10, draw=black!50] (0,0) rectangle ++(1.5,2.5);
+                \node at (0.75,1.25) {\shortstack{语法 \\ 制导 \\ 翻译}};
+                \draw[-{Stealth[angle'=45]}] (1.5,1.25) -- node[above] {Eeyore} node[below] {AST} ++(1.25,0);
+            \end{scope}
+            \begin{scope}[shift={(8.25,0)}]
+                \draw[fill=gray!10, draw=black!50] (0,0) rectangle ++(1.5,2.5);
+                \node at (0.75,1.25) {\shortstack{中间 \\ 表示 \\ 优化}};
+                \draw[-{Stealth[angle'=45]}] (1.5,1.25) -- node[above] {活跃} node[below] {分析} ++(1.25,0);
+            \end{scope}
+            \begin{scope}[shift={(11,0)}]
+                \draw[fill=gray!10, draw=black!50] (0,0) rectangle ++(1.5,2.5);
+                \node at (0.75,1.25) {\shortstack{寄存器 \\ 分配 \\ (linear)}};
+                \draw[-{Stealth[angle'=45]}] (1.5,1.25) -- node[above] {指令} node[below] {选择} ++(1.25,0);
+            \end{scope}
+            \begin{scope}[shift={(13.75,0)}]
+                \draw[fill=gray!10, draw=black!50] (0,0) rectangle ++(1.5,2.5);
+                \node at (0.75,1.25) {\shortstack{代码 \\ 生成 \\ (table)}};
+            \end{scope}
+        \end{tikzpicture}
+        \caption{所实现的编译器的工作流程}
+        \label{fig:flowchart}
+    \end{figure}
+
+    \section{代码生成}
+    \definecolor{codebg}{rgb}{0.98, 0.98, 0.98}
+    \begin{minted}[bgcolor=codebg]{cpp}
+void ir_parser::register_saver(const std::string inside[],
+                                const int len,
+                                int should_push) {
+    for (int i = 0; i < len; i++) {
+        std::string reg = inside[i];
+        if (!reg2var.count(reg)) continue; // 不使用无需保存
+        if (should_push)
+            tigger_code += "store" + reg + std::to_string(reg_table[reg]);
+        else
+            tigger_code += "load" + std::to_string(reg_table[reg]) + reg;
+    }
+}
+    \end{minted}
+
+    \begin{compactenum}[(i)]
+        \item \texttt{register\_saver(return\_val\_regs, return\_len, PUSH)}, 保存传递参数的寄存器.
+        \item 参数赋值.
+        \item \texttt{register\_saver(caller\_saved\_regs, caller\_len, PUSH)}, 保存调用者保存寄存器.
+        \item 函数调用.
+        \item \texttt{register\_saver(caller\_saved\_regs, caller\_len, POP)}, 恢复调用者保存寄存器.
+        \item 如果返回值对应的寄存器不是 \texttt{a} 开头的, 则直接完成赋值语句. 否则先把 \texttt{a0} 保存到 \texttt{s1} 中(不然下一步会被覆盖).
+        \item \texttt{register\_saver(return\_val\_regs, return\_len, POP)}, 恢复传递参数的寄存器.
+        \item 如果返回值还在 \texttt{s1} 中, 这时进行赋值.
+    \end{compactenum}
+    
+    使用的算法 \ref{algo:liveness} 是教材 \cite{compiler2009aho} 的改良版, 参考 \cite[第 397 页]{appel2004modern}.
+    \begin{algorithm}[H]
+        \small
+        \caption{活跃分析}
+        \label{algo:liveness}
+        \begin{algorithmic}[1]
+            \Require 一个函数的语句列表 \texttt{block}
+            \State 队列 $\texttt{q} \gets \varnothing$
+            \For{$\texttt{stmt} \in \texttt{block}$}
+                \State 清空 \texttt{stmt->in, stmt->out}
+                \State \texttt{q.push(stmt)}
+            \EndFor
+            \While{\texttt{q} 不为空}
+                \State $\texttt{n} \gets \texttt{q.pop()}$
+                \State $\texttt{old\_in} \gets \texttt{n->in}$
+                \State $\texttt{n->out} \gets \bigcup_{\texttt{n'} \in \texttt{n->succ}} \texttt{n'.in}$
+                \State $\texttt{n->in} \gets \texttt{n->use} \cup (\texttt{n->out} \setminus \texttt{n->def})$
+                \If{\texttt{old\_in != n->in}}
+                    \For{$\texttt{m} \in \texttt{n->pred}$}
+                        \State \texttt{q.push(m)}
+                    \EndFor
+                \EndIf
+            \EndWhile
+        \end{algorithmic}
+    \end{algorithm}
+
+    \renewcommand{\em}{\itshape}
+    \printbibliography[title={参考文献}]
+\end{document}

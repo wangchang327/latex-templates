@@ -1,0 +1,14 @@
+% 伪代码支持, 以下成套使用
+\RequirePackage{algorithm}
+\RequirePackage{algorithmicx}
+\RequirePackage{algpseudocode}
+
+% 最基本的汉化
+\renewcommand{\algorithmicrequire}{\textbf{输入:}}
+\renewcommand{\algorithmicensure}{\textbf{输出:}}
+\makeatletter
+\renewcommand*{\ALG@name}{算法}
+\makeatother
+
+% 懒人高亮支持, 需要 pip install Pygments
+\RequirePackage{minted}

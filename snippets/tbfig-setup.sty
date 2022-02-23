@@ -1,0 +1,19 @@
+% 图片
+\RequirePackage{graphicx}
+\RequirePackage{float} % 浮动体支持
+\RequirePackage[labelfont={small, bf}]{caption} % 自行选择图 x.y 的标签的字体
+
+% 表格
+\RequirePackage{booktabs} % 三线表支持
+\RequirePackage{array} % 可自行更改 columntype
+% 以下这个 columntype 较有用, 即自行更改宽度, 但保持居中
+\newcolumntype{A}[1]{>{\centering\arraybackslash}p{#1\textwidth}}
+\RequirePackage{longtable} % 跨页列表, 自行取舍
+\RequirePackage{multirow} % 合并单元格支持
+\RequirePackage{diagbox} % 绘制斜线形式的表头
+
+% 汉化支持
+\renewcommand{\figurename}{图}
+\renewcommand{\tablename}{表}
+\renewcommand{\listfigurename}{图片索引}
+\renewcommand{\listtablename}{表格索引}

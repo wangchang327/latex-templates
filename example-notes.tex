@@ -1,0 +1,59 @@
+\documentclass[a4paper, 12pt]{book}
+\usepackage{snippets/font-setup}
+\usepackage{snippets/title-setup}
+\usepackage{snippets/math-setup}
+\usepackage{snippets/geometry-setup}
+\usepackage{snippets/list-setup}
+\usepackage{snippets/tbfig-setup}
+\usepackage{snippets/bib-setup}
+
+\addbibresource{example-refs.bib}
+
+\begin{document}
+    \frontmatter
+    \input{snippets/general-cover}
+
+    \tableofcontents
+
+    \mainmatter
+    
+    \chapter{概率极限定理}
+    \section{大数律}
+    \begin{theorem}
+        设 $S_1, \dotsc, S_k \subseteq [n]$, 满足对任意的 $A, B \subseteq [n]$ 都存在 $i$ 使得 $|S_i \cap A| \neq |S_i \cap B|$. 那么 $k \geq (2-o(1)) \frac{n}{\log_2n}$.
+    \end{theorem}
+    \begin{proof}
+        均匀, 随机地从 $2^{[n]}$ 中取一个集合 $X$, 那么 $n=H(X)$. 注意如果 $S_1, \dotsc, S_k$ 满足所说的条件, 那么确定 $|X \cap S_i|\,(1 \leq i \leq k)$ 和确定 $X$ 是一回事. 因此
+        \[ n=H(X)=H(|X \cap S_1|, \dotsc, |X \cap S_k|) \leq \sum_{i=1}^k H(|X \cap S_i|). \]
+        因为 $X$ 是均匀挑选的, 相当于独立地挑选其中每个元素, 所以 $|X \cap S_i|$ 服从的是 $B \left(|S_i|, \frac{1}{2} \right)$. 下面计算 $Y \sim B(n, p)$ 的熵.
+        
+        要算的是
+        \[ H(Y)=-\frac{1}{\log 2} \sum_{k=0}^n \binom{n}{k} p^k(1-p)^{n-k} \log \left[\binom{n}{k} p^k(1-p)^{n-k} \right]. \]
+        回忆中心极限定理的特殊情形 de Moivre--Laplace 定理, 我们有 $\binom{n}{k} p^k(1-p)^{n-k} = \frac{1}{\sqrt{2 \pi np(1-p)}} \e^{-\frac{(k-np)^2}{2np(1-p)}}+o(1)$, 所以
+        \begin{align*}
+            H(Y) &= -\frac{1}{\log 2} \sum_{k=0}^n p(k) \left(-\log\sqrt{2 \pi np(1-p)} -\frac{(k-np)^2}{2np(1-p)}+o(1) \right)
+            \\& = \frac{1}{\log 2} \left(\frac{1}{2} \log 2 \pi np(1-p) + \frac{\E[Y^2]-2np \E[Y]+n^2p^2}{2np(1-p)}+o(1) \right)
+            \\& = \frac{1}{2 \log 2} \log 2 \pi nep(1-p)+o(1) \xlongequal{p=0.5} \frac{1}{2} \log_2n+O(1).
+        \end{align*}
+        从而 $n \leq \frac{k}{2} \log_2n+O(1)$, 整理即得. 如果不计算二项分布的熵, 会丢失常数.
+    \end{proof}
+
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{@{}A{0.06}A{0.06}A{0.15}A{0.06}A{0.06}A{0.06}A{0.25}@{}}
+            \toprule
+            $k$ & $\ell$ & $(k-2)(\ell-2)$ & $e$ & $n$ & $f$ & 正多面体名称 \\ \midrule
+            3   & 3      & 1               & 6   & 4   & 4   & 正四面体   \\
+            3   & 4      & 2               & 12  & 8   & 6   & 立方体    \\
+            4   & 3      & 2               & 12  & 6   & 8   & 正八面体   \\
+            3   & 5      & 3               & 30  & 20  & 12  & 正十二面体  \\
+            5   & 3      & 3               & 30  & 12  & 20  & 正二十面体  \\ \bottomrule
+        \end{tabular}
+        \caption{正多面体的分类}
+    \end{table}
+
+    \backmatter
+    \nocite{*}
+    \renewcommand{\em}{\itshape}
+    \printbibliography[heading=bibintoc, title={参考文献}]
+\end{document}

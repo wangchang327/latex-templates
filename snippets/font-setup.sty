@@ -1,0 +1,86 @@
+\RequirePackage[CJKchecksingle, AutoFakeBold]{xeCJK} % 中文支持. AutoFakeBold 尤其重要, 可自动制造一些伪粗体; CJKchecksingle 是用来减少段末孤字带来的不美观情况
+\RequirePackage{CJKnumb} % 中文数字, 例如作用于 \CJKnumber{chapter}
+
+% 以下自行取舍, 若要使用 Times New Roman 型字体可选用
+% \RequirePackage{newtxtext}
+% \RequirePackage[cmintegrals, cmbraces]{newtxmath} % 此包还有更多丰富的数学字体
+% \let\Bbbk\relax % 权宜之计, 防止出现 already defined 错误 (和 amssymb 冲突)
+% \renewcommand{\mathbb}{\varmathbb}
+
+% 若使用 TNR 字体, 最好替换求和和积分符号使其美观 (仿 mtpro2 的字体)
+% \DeclareSymbolFont{CMlargesymbols}{OMX}{cmex}{m}{n}
+% \let\sumop\relax\let\prodop\relax
+% \DeclareMathSymbol{\sumop}{\mathop}{CMlargesymbols}{"50}
+% \DeclareMathSymbol{\prodop}{\mathop}{CMlargesymbols}{"51}
+% \RequirePackage{courier} % 西文等宽字体. TNR 可和 courier 字体配合使用, 如无 TNR 则此条最好删除. 自行取舍
+
+\RequirePackage{fontspec}
+\RequirePackage{anyfontsize} % 有助于使用特别大的字号
+
+\setsansfont{TeX Gyre Heros} % 西文无衬线字体, 类似于 Arial
+
+% 完全取决于个人偏好: 以下字体若无配备则可以改成 Fandol 系列或其它
+% 中文主字体为思源宋体, 斜体使用方正楷体
+\setCJKmainfont[
+    ItalicFont=FZKai-Z03S
+]{Noto Serif CJK SC}
+
+% 中文无衬线字体为思源黑体, 黑体使用中黑, 斜体仍然为方正楷体
+\setCJKsansfont[
+    BoldFont=* Medium,
+    ItalicFont=FZKai-Z03S
+]{Noto Sans CJK SC}
+
+% 中文等宽字体 (配合西文等宽字体) 使用方正楷体
+\setCJKmonofont[
+    ItalicFont=FZKai-Z03S
+]{FZKai-Z03S}
+
+% 以下定义一些中文名称的字体, 完全为个人偏好
+\setCJKfamilyfont{kai}{FZKai-Z03S}
+
+\setCJKfamilyfont{song}[
+    ItalicFont=FZKai-Z03S
+]{Noto Serif CJK SC}
+
+\setCJKfamilyfont{fangsong}[
+    ItalicFont=FZKai-Z03S
+]{FZFangSong-Z02S}
+
+\setCJKfamilyfont{xihei}{Noto Sans CJK SC}
+\setCJKfamilyfont{hei}{Noto Sans CJK SC Medium}
+\setCJKfamilyfont{hei2}[
+    BoldFont=* Bold
+]{Noto Sans CJK SC}
+
+% 很粗的黑体
+\setCJKfamilyfont{black}[
+    BoldFont=* Black
+]{Noto Sans CJK SC}
+
+% 节标题用很粗的黑体
+\setCJKfamilyfont{sectionfont}[
+    BoldFont=* Black
+]{Noto Sans CJK SC}
+
+% 证明标题用中黑
+\setCJKfamilyfont{pffont}[
+    BoldFont=* Medium
+]{Noto Sans CJK SC}
+
+% 中文强调 \emph 用中黑
+\setCJKfamilyfont{emfont}[
+    BoldFont=* Medium
+]{Noto Sans CJK SC}
+
+\defaultfontfeatures{Ligatures=TeX} 
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip=0pt plus 1pt minus 0.1pt
+
+% 定义常见的中文字体命令, 这一点 ctex 也会帮忙做, 所以不要加载 ctex
+\newcommand\kaishu{\CJKfamily{kai}}
+\newcommand\songti{\CJKfamily{song}}
+\newcommand\heiti{\CJKfamily{hei}}
+\newcommand\thmheiti{\CJKfamily{hei2}}
+\newcommand\fangsong{\CJKfamily{fangsong}}
+\renewcommand{\em}{\bfseries\CJKfamily{emfont}} % 中文强调用粗体而不是楷体. 如果使用了这个, 需在参考文献引入之前改回来, 否则不美观

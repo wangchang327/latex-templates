@@ -1,0 +1,20 @@
+% 以下仅供参考
+\RequirePackage{tikz}
+\usetikzlibrary{shapes.symbols, backgrounds, matrix, calc, arrows, math, arrows.meta, decorations.pathreplacing, decorations.markings}
+\RequirePackage{tikz-cd} % 交换图
+\RequirePackage{tkz-euclide} % 平面几何工具
+\RequirePackage{pgfplots} % PGF 绘图, 包装了一些 TikZ 的内容
+\pgfplotsset{compat=newest}
+
+\tikzset{vertex/.style={circle, draw=black, fill=black!15, inner sep=1pt, minimum size=5pt}}
+\tikzset{every loop/.append style=-{Stealth[angle'=45]}} % 比较美观的箭头
+\tikzset{mid arrow/.style={postaction={decorate, decoration={
+        markings,
+        mark=at position 0.5 with {\arrow[#1]{Stealth[angle'=45]}}
+    }}}
+}
+\tikzset{nearend arrow/.style={postaction={decorate, decoration={
+        markings,
+        mark=at position 0.7 with {\arrow[#1]{Stealth[angle'=45]}}
+    }}}
+}

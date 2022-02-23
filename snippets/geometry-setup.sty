@@ -1,0 +1,81 @@
+\RequirePackage{setspace}
+\onehalfspacing % 1.5 倍行距, 实际上差不多是 Word 中的单倍
+\renewcommand{\arraystretch}{1}
+\RequirePackage{indentfirst}
+\setlength{\parindent}{2em} % 首行缩进
+
+% 常用的文章结构的汉化
+\renewcommand{\contentsname}{目录}
+
+\makeatletter
+\@ifclassloaded{book}{\relax}{\renewcommand{\abstractname}{摘要}} % 若为 book 等文档类则无此选项
+\g@addto@macro\appendix{
+    \renewcommand{\appendixname}{附录}
+    \renewcommand{\chaptermark}[1]{\markboth{附录 \thechapter \quad #1}{}}
+    \renewcommand{\sectionmark}[1]{\markright{\S\thesection \quad #1}}
+}
+\makeatother
+
+% 以下为页面设置, 采用标准的 A4 样式
+% \RequirePackage{fullpage} % 可以用这个得到更宽的页面
+\RequirePackage{geometry}
+\geometry{
+    paper=a4paper,
+    top=3cm,
+    inner=2.54cm,
+    outer=2.54cm,
+    bottom=3cm,
+    headheight=6ex,
+    headsep=6ex,
+    twoside
+}
+
+\RequirePackage{fancyhdr} % 页眉页脚的设置
+
+\makeatletter
+\@ifclassloaded{book}{%
+    % 比较大型的页面
+    \pagestyle{fancy}
+    % 根据需要设置页眉, 可以添加作者姓名, 文章标题等等
+    \renewcommand{\chaptermark}[1]{\markboth{\CJKnumber{\thechapter} \quad #1}{}}
+    \renewcommand{\sectionmark}[1]{\markright{\S\arabic{section} \quad #1}}
+    \fancyhf{}
+
+    % O/E 单双数页, L/C/R 位置
+    \fancyhead[EC]{\CJKfamily{hei2}\footnotesize{\leftmark}\vspace{1mm}}
+    \fancyhead[OC]{\CJKfamily{hei2}\footnotesize{\rightmark}\vspace{1mm}}
+    \fancyhead[LE, RO]{{\footnotesize \thepage}\vspace{1mm}}
+    \fancyhead[RE, LO]{}
+
+    % 根据需要设置页眉和页脚分隔符的宽度
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+    \addtolength{\headheight}{0.5pt}
+
+    % 用来清除页眉页脚
+    \fancypagestyle{plain}{
+        \fancyhead{}
+        \renewcommand{\headrulewidth}{0pt}
+    }
+}{%
+    % 更简洁的页眉页脚
+    \RequirePackage{lastpage}
+    \fancypagestyle{plain}{
+        \fancyhf{}
+        \lhead{\small 页眉标题}
+        \rhead{\thepage}
+        \cfoot{第 \thepage 页, 共 \pageref*{LastPage} 页}
+    }
+    \pagestyle{plain}
+}
+\makeatother
+
+% 超链接
+\RequirePackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=red,
+    urlcolor=teal
+}
+\RequirePackage{url} % 自行取舍, 可用于方便书写链接

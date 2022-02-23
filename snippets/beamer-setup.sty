@@ -1,0 +1,180 @@
+% 主题色, 可自选
+\RequirePackage{xcolor}
+\definecolor{strublue}{cmyk}{1, 0.6, 0, 0.4}
+\setbeamercolor{structure}{fg=strublue}
+
+\usefonttheme{professionalfonts}
+
+% 权宜之计, 覆盖一下 font-setup 中的设定
+\renewcommand\songti{\CJKfamily{xihei}}
+\renewcommand\fangsong{\CJKfamily{xihei}}
+
+% 西文字体设置, 可自行决定
+\setsansfont[
+    Ligatures=TeX,
+    BoldFont={* Bold},
+]{Calibri}
+
+% 大标题, 帧标题等的字体字号
+\setbeamerfont{title}{
+    size=\LARGE,
+    shape=\bfseries\sffamily\CJKfamily{black}
+}
+
+\setbeamerfont{subtitle}{
+    size=\large,
+    shape=\bfseries\sffamily\CJKfamily{hei}
+}
+
+\setbeamerfont{author}{
+    size=\normalsize,
+    shape=\bfseries\sffamily
+}
+
+\setbeamerfont{details}{
+    size=\footnotesize,
+    shape=\bfseries\sffamily
+}
+
+\setbeamerfont{frametitle}{
+    size=\LARGE,
+    shape=\bfseries\sffamily\CJKfamily{black}
+}
+
+\setbeamerfont{framesubtitle}{
+    size=\normalsize,
+    shape=\bfseries\sffamily
+}
+
+% 标题的间距
+\setbeamertemplate{frametitle}{
+    \vskip0.6em\par
+    \usebeamerfont{frametitle}\insertframetitle\par
+    \usebeamerfont{framesubtitle}\insertframesubtitle\par
+}
+
+% 去除各种无用的元素, 留幻灯片编号
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}{%
+    \leavevmode%
+    \hbox{%
+        \usebeamerfont{footline}%
+        \begin{beamercolorbox}[
+            wd=\textwidth,
+            ht=3ex,
+            dp=1.25ex
+        ]{footline}%
+            \hfill%
+            \insertframenumber{} / \inserttotalframenumber%
+            \hspace{1cm}
+        \end{beamercolorbox}%
+    }
+    \vskip0pt%
+}
+
+% 重定义 block 的颜色和字体
+\setbeamercolor{block title}{bg=cyan, fg=white}
+\setbeamercolor{block body}{bg=cyan!10}
+\setbeamercolor{block title alerted}{fg=white, bg=orange}
+\setbeamercolor{block body alerted}{bg=orange!25}
+\setbeamercolor{block title example}{fg=white, bg=teal}
+\setbeamercolor{block body example}{bg=teal!25}
+
+\setbeamerfont{block title}{
+    size=\normalfont,
+    shape=\strut\bfseries\sffamily\CJKfamily{hei2}
+}
+
+\setbeamerfont{blockdef}{
+    size=\large,
+    shape=\bfseries\sffamily\CJKfamily{hei}
+}
+
+% 列表环境的开头符号
+\setbeamerfont{description item}{shape=\bfseries\sffamily\CJKfamily{hei}}
+
+\setbeamertemplate{sections/subsections in toc}[square]
+\setbeamertemplate{itemize item}[square]
+\setbeamertemplate{itemize subitem}[circle]
+
+\setbeamertemplate{frametitle continuation}{}
+
+\setbeamertemplate{separator}{%
+    \usebeamercolor{separator}%
+    \textcolor{fg}{\rule{0.7\textwidth}{0.5pt}}%
+}
+
+\renewcommand{\beamer@andtitle}{\\}
+
+% 标题页和图片
+\RequirePackage{tikz}
+\usetikzlibrary{fadings}
+\newcommand{\background}[1]{\newcommand{\wc@background}{#1}}
+
+\tikzfading[
+    name=title page picture fading,
+    left color=transparent!0,
+    right color=transparent!100,
+]
+
+\setbeamertemplate{title page}{%
+    \thispagestyle{empty}
+    \addtocounter{framenumber}{-1}
+    \begin{minipage}{0.7\textwidth}
+        \raggedright
+        \usebeamerfont{title}
+        \inserttitle
+
+        \usebeamertemplate{separator}
+
+        \usebeamerfont{author}
+        \vspace{2em}
+        \insertauthor
+
+        \vspace{2em}
+        \usebeamerfont{details}
+        \insertinstitute
+
+        \insertdate
+    \end{minipage}
+
+    \ifdefined\wc@background
+    \begin{tikzpicture}[remember picture, overlay]
+        % 裁剪
+        \clip (current page.south east)
+           -- (current page.north east)
+           -- ++(-5.1, 0)
+           -- ++(-3, -\paperheight)
+           -- cycle;
+
+        \node[
+            anchor=south east,
+            inner sep=0,
+            outer sep=0
+        ] at (current page.south east) {
+            \includegraphics[height=\paperheight]{\wc@background}
+        };
+    \end{tikzpicture}
+    \fi
+}
+
+% 简单的致谢页
+\newcommand{\fin}[1]{%
+    \begin{frame}
+        \begin{center}
+            \Huge{#1}
+        \end{center}
+    \end{frame}
+}
+
+% 占满页面的图片
+\newcommand<>{\fullgraphicsframe}[1]{%
+    {
+        \usebackgroundtemplate{%
+            \vbox to \paperheight{\vfil\hbox to \paperwidth{\hfil\includegraphics{#1}\hfil}\vfil}
+        }
+        \begin{frame}[plain]
+        \end{frame}
+    }
+}

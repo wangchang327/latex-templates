@@ -1,0 +1,5 @@
+\RequirePackage{paralist} % 较懒人的解决方案
+% 根据个人喜好选择列表的符号等
+\setdefaultitem{$\diamond$}{}{}{}
+\renewcommand{\descriptionlabel}[1]{\hspace{\labelsep} $\vartriangleright$\enskip {\heiti #1} \;}
+\renewcommand{\paradescriptionlabel}[1]{\normalfont \heiti #1 \enskip}

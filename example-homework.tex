@@ -1,0 +1,34 @@
+\documentclass[11pt]{article}
+\usepackage{snippets/font-setup}
+\usepackage{snippets/title-setup}
+\usepackage{snippets/math-setup}
+\usepackage{snippets/geometry-setup}
+
+\title{\textbf{作业 1}}
+\author{张三 \\ 114514}
+\date{2022 年春}
+
+\begin{document}
+    \maketitle
+
+    \begin{hwsol}
+        在级数展开中作用 $\hat H$ 的时间表达式得
+        \[ \hat Hu=i \hbar \partial_t \sum_{n=1}^\infty c_n(t) \Psi_n(x)=i \hbar \sum_{n=1}^\infty c_n'(t) \Psi_n(x). \]
+        又作用 $\hat H$ 的 $x$ 的表达式得
+        \[ \hat H u = \sum_{n=1}^\infty c_n(t)E_n \Psi_n(x). \]
+        
+        因为特征函数是线性无关的, 所以 $i \hbar c'_n(t)=c_n(t)E_n$, 解得 $c_n(t) = \exp \left(\frac{E_nt}{i \hbar}\right)c_n(0)$. 对于 $t=0$ 时,
+        \[ u(x, 0)=u_0(x) = \sum_{n=1}^\infty c_n(0) \Psi_n(x), \]
+        两边乘以 $\Psi_m(x)$ 并利用正交性
+        \[ \int_{\mathbb R} u_0(x) \Psi_m(x)\,\mathrm dx=c_m(0). \]
+        代入前面 $c_n(t)$ 的表达式就得到了题目要求的式子.
+        
+        求 Green 函数则如下运算:
+        \begin{align*}
+            u(x, t) &= \sum_{n=1}^\infty \Psi_n(x) \exp \left(\frac{E_nt}{i \hbar}\right) \int_{\mathbb R} u_0(y) \Psi_n(y)\,\mathrm dy = \sum_{n=1}^\infty \int_{\mathbb R} u_0(y) \Psi_n(x) \exp \left(\frac{E_nt}{i \hbar}\right) \Psi_n(y)\,\mathrm dy
+            \\&= \int_{\mathbb R} \sum_{n=1}^\infty u_0(y) \Psi_n(x) \exp \left(\frac{E_nt}{i \hbar}\right) \Psi_n(y)\,\mathrm dy = \int_{\mathbb R} u_0(y) \sum_{n=1}^\infty \Psi_n(x) \exp \left(\frac{E_nt}{i \hbar}\right) \Psi_n(y)\,\mathrm dy.
+        \end{align*}
+        所以
+        \[ G(x, x', t) = \sum_{n=1}^\infty \Psi_n(x) \Psi_n(x') \exp \left(\frac{E_nt}{i \hbar} \right). \]
+    \end{hwsol}
+\end{document}
