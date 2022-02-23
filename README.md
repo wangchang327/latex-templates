@@ -70,4 +70,4 @@ Notes
 
 ## 致谢
 
-有不少代码是我从[这里]()学到的，后者和本 repo 均使用 [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/legalcode.zh-Hans) 协议。[博雅塔的背景图](background.jpg)来自肥猴，此处仅为演示用途，勿作他用。
+有不少代码是我从[这里](https://github.com/wenweili/AlJabr-1)学到的，后者和本 repo 均使用 [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/legalcode.zh-Hans) 协议。[博雅塔的背景图](background.jpg)来自肥猴，此处仅为演示用途，勿作他用。
