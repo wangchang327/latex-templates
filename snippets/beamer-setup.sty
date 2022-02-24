@@ -172,7 +172,7 @@
 \newcommand<>{\fullgraphicsframe}[1]{%
     {
         \usebackgroundtemplate{%
-            \vbox to \paperheight{\vfil\hbox to \paperwidth{\hfil\includegraphics{#1}\hfil}\vfil}
+            \vbox to \paperheight{\vfil\hbox to \paperwidth{\hfil\includegraphics[height=0.99\textheight]{{#1}\hfil}\vfil}
         }
         \begin{frame}[plain]
         \end{frame}
