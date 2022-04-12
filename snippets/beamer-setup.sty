@@ -12,7 +12,7 @@
 % 西文字体设置, 可自行决定
 \setsansfont[
     Ligatures=TeX,
-    BoldFont={* Bold},
+    BoldFont=* Bold
 ]{Calibri}
 
 % 大标题, 帧标题等的字体字号
@@ -172,7 +172,7 @@
 \newcommand<>{\fullgraphicsframe}[1]{%
     {
         \usebackgroundtemplate{%
-            \vbox to \paperheight{\vfil\hbox to \paperwidth{\hfil\includegraphics[height=0.99\textheight]{{#1}\hfil}\vfil}
+            \vbox to \paperheight{\vfil\hbox to \paperwidth{\hfil\includegraphics[height=0.99\textheight]{#1}\hfil}\vfil}
         }
         \begin{frame}[plain]
         \end{frame}
