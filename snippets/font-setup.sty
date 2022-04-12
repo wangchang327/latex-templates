@@ -1,18 +1,5 @@
 \RequirePackage[CJKchecksingle, AutoFakeBold]{xeCJK} % 中文支持. AutoFakeBold 尤其重要, 可自动制造一些伪粗体; CJKchecksingle 是用来减少段末孤字带来的不美观情况
-\RequirePackage{CJKnumb} % 中文数字, 例如作用于 \CJKnumber{chapter}
-
-% 以下自行取舍, 若要使用 Times New Roman 型字体可选用
-% \RequirePackage{newtxtext}
-% \RequirePackage[cmintegrals, cmbraces]{newtxmath} % 此包还有更多丰富的数学字体
-% \let\Bbbk\relax % 权宜之计, 防止出现 already defined 错误 (和 amssymb 冲突)
-% \renewcommand{\mathbb}{\varmathbb}
-
-% 若使用 TNR 字体, 最好替换求和和积分符号使其美观 (仿 mtpro2 的字体)
-% \DeclareSymbolFont{CMlargesymbols}{OMX}{cmex}{m}{n}
-% \let\sumop\relax\let\prodop\relax
-% \DeclareMathSymbol{\sumop}{\mathop}{CMlargesymbols}{"50}
-% \DeclareMathSymbol{\prodop}{\mathop}{CMlargesymbols}{"51}
-% \RequirePackage{courier} % 西文等宽字体. TNR 可和 courier 字体配合使用, 如无 TNR 则此条最好删除. 自行取舍
+\RequirePackage{zhnumber} % 中文数字
 
 \RequirePackage{fontspec}
 \RequirePackage{anyfontsize} % 有助于使用特别大的字号
