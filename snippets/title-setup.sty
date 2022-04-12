@@ -3,7 +3,7 @@
 
 % 以下全部之美观的标题设置不是我写的, 但很好用 (CC-BY-4.0, 作者李文威)
 \RequirePackage{xstring}
-\providecommand{\chapterttl}[1]{\IfSubStr{ABCDEFGHIJKLMNOPQRSTUVWXYZ}{#1}{附录 #1	}{第\CJKnumber{#1}章}}
+\providecommand{\chapterttl}[1]{\IfSubStr{ABCDEFGHIJKLMNOPQRSTUVWXYZ}{#1}{附录 #1	}{第\zhnumber{#1}章}}
 \newlength{\BoxTtlwidth}
 \RequirePackage[many]{tcolorbox} % 标题的框
 
@@ -149,7 +149,7 @@
 \titlespacing*{name=\subsubsection} % 设置间隔
     {0pt}{*1}{1em}    % {left}{before-sep}{after-sep}
 
-\renewcommand{\thepart}{\CJKnumber{\arabic{part}}} % 部分的标题编号汉化
+\renewcommand{\thepart}{\zhnumber{\arabic{part}}} % 部分的标题编号汉化
 \titleformat{name=\part}[display] % 各部分标题
     {\filcenter\sffamily\bfseries\CJKfamily{song}\Huge} % Format
     {第{\thepart}部分} % Label
